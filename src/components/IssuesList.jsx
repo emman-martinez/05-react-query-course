@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { IssueItem } from "./IssueItem";
 import fetchWithError from "../helpers/fetchWithError";
+import Loader from "./Loader";
 
 export default function IssuesList({ labels, status }) {
   const [searchValue, setSearchValue] = useState("");
@@ -47,7 +48,7 @@ export default function IssuesList({ labels, status }) {
           onChange={onChange}
         />
       </form>
-      <h2>Issues List</h2>
+      <h2>Issues List {issuesQuery.isFetching && <Loader />}</h2>
       {issuesQuery.isLoading ? (
         <p>Loading...</p>
       ) : issuesQuery.isError ? (
