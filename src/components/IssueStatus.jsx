@@ -6,7 +6,7 @@ export default function IssueStatus({ issueNumber, status }) {
 
   const setStatus = useMutation(
     (status) => {
-      fetch(`/api/issues/${issueNumber}`, {
+      return fetch(`/api/issues/${issueNumber}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
