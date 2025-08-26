@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 export default function Issues() {
   const [labels, setLabels] = useState([]);
   const [status, setStatus] = useState("");
+  const [pageNum, setPageNum] = useState(1);
 
   const onToggle = (label) => {
     setLabels((currentLabels) =>
@@ -14,16 +15,25 @@ export default function Issues() {
         ? currentLabels.filter((currentLabel) => currentLabel !== label)
         : currentLabels.concat(label)
     );
+    setPageNum(1);
   };
 
-  const onChangeStatus = (event) => setStatus(event.target.value);
+  const onChangeStatus = (event) => {
+    setStatus(event.target.value);
+    setPageNum(1);
+  };
 
   return (
     <div>
       <main>
         <section>
           <h1>Issues</h1>
-          <IssuesList labels={labels} status={status} />
+          <IssuesList
+            labels={labels}
+            pageNum={pageNum}
+            status={status}
+            setPageNum={setPageNum}
+          />
         </section>
         <aside>
           <LabelList selected={labels} toggle={onToggle} />
